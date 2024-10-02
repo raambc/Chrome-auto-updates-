@@ -1,3 +1,13 @@
+
+Executive Summary
+
+We are currently investigating an issue where registry values responsible for disabling Chrome and Edge auto-updates are being removed, leading to automatic browser updates on some machines. A Microsoft case has been opened, and as of October 2, a Microsoft engineer has been assigned to identify the root cause. We have also requested support from M's team to provide sample machines for further analysis.
+
+In parallel, we discovered that an auto-update URL, which was previously blocked, had been unblocked based on REQUEST XXX. After coordinating with the proxy team, we confirmed that re-blocking this URL successfully prevents automatic browser updates. Given the upcoming Google Chrome version release on October 9, we have asked the proxy team to expedite the request to block the URL again, ensuring that updates remain under our control.
+
+This multi-faceted approach is ongoing as we work closely with both Microsoft and internal teams to resolve the issue.
+----
+
 Problem Ticket Update
 
 A Microsoft case has been logged to analyze why the registry values for disabling Chrome and Edge updates are being removed or deleted. It was successfully tested that when these registry entries are deleted, the browsers are automatically updated.
