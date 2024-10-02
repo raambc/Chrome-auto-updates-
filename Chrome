@@ -1,3 +1,9 @@
-The group policy processing delays, particularly involving Citrix and registry-related policies, are contributing to the bypass of Chrome update management GPOs on affected machines. These delays allow Chrome to initiate direct updates from Google before the policy can take effect. Several potential causes have been identified, including excessive usage of WMI queries within policies, WMI-related issues, and application configurations that depend on WMI, as indicated by event log 1035. Additionally, Live Client VDIs that have undergone multiple Windows service upgrades tend to consume more CPU cycles, which can further slow down policy application.
+Problem Ticket Update
 
-The issue is complex and not directly tied to a single cause, as it involves various system components. Investigation is ongoing, with teams monitoring Event ID 5016 and setting thresholds to track the delays in policy processing. This approach will help narrow down specific contributing factors, allowing for a more focused resolution strategy.
+A Microsoft case has been logged to analyze why the registry values for disabling Chrome and Edge updates are being removed or deleted. It was successfully tested that when these registry entries are deleted, the browsers are automatically updated.
+
+As of October 2 (India Time Zone), a Microsoft engineer has been assigned to this case, and the team is working with Microsoft to identify the root cause. We have requested M's assistance in providing sample machines where the issue has been identified for further investigation.
+
+In parallel, we collaborated with the proxy team and identified that an auto-update URL, previously blocked, was unblocked based on REQUEST XXX. This change was made for reason XYZ, and testing is required before re-blocking the URL. We are coordinating this effort with the requester of REQUEST XXX.
+
+Blocking this URL has been tested successfully and can prevent automatic updates. Given that the next stable version of Google Chrome is scheduled for release on October 9, we have requested the proxy team to fast-track the re-blocking request.
