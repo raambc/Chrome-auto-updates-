@@ -1,0 +1,30 @@
+If a site is explicitly added as "EDGE Engine" in the Enterprise Mode Site List, it will render using the modern Edge engine while still allowing centralized control over how that site behaves within an enterprise environment. This is different from simply not being added to the list at all. Here's how the two scenarios compare:
+
+When a Site is Added as "EDGE Engine" in the Enterprise Mode Site List:
+
+1. Explicit Control: The site is deliberately included in the site list, and the Edge engine is forced to render the page. This gives administrators more control over how specific sites are handled.
+
+
+2. Centralized Management: The organization manages which sites use the Edge engine through the XML file, ensuring consistency across all users and devices within the company.
+
+
+3. Fallback Prevention: The site is forced to run in the modern Edge mode, and it avoids being rendered in legacy modes (such as IE mode), reducing the risk of unexpected behaviors tied to older standards.
+
+
+
+When a Site is Not Added to the Enterprise Mode Site List:
+
+1. Default Behavior: The site will still render in Edge, but without the centralized control. Edge will simply use its default modern engine to render any site not included in the list.
+
+
+2. No Centralized Control: Since the site isn’t managed through the list, users may experience inconsistency depending on their settings or group policies that could impact browser behavior.
+
+
+3. Potential Legacy Issues: If the site has some legacy dependencies that aren’t obvious and is not added to the list, users might experience issues without realizing the need for a specific mode.
+
+
+
+Conclusion:
+
+While both cases involve the site using the modern Edge engine, adding it to the site list as "Edge Engine" ensures that it's managed and controlled by the organization's IT policies, providing better consistency and oversight. Not adding it means the site will still use the modern engine but without that level of control or management.
+
