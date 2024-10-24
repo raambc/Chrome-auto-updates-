@@ -1,0 +1,23 @@
+# Variables
+$extensionId = "your_extension_id"  # Replace with the extension's ID from Chrome Web Store
+$profileDir = "$env:LOCALAPPDATA\Google\Chrome\User Data\Profile 1"  # Path to the Chrome user profile directory
+
+# Check if profile directory exists
+if (-Not (Test-Path -Path $profileDir)) {
+    Write-Host "Profile directory does not exist. Creating it..."
+    New-Item -ItemType Directory -Force -Path $profileDir
+}
+
+# Define Chrome executable path
+$chromePath = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+
+# Check if Chrome is installed
+if (-Not (Test-Path -Path $chromePath)) {
+    Write-Host "Chrome is not installed. Exiting."
+    exit
+}
+
+# Install extension by launching Chrome with the extension ID and user profile
+Start-Process $chromePath -ArgumentList "--profile-directory='Profile 1' --load-extension=$profileDir\Extensions\$extensionId --enable-automation"
+
+Write-Host "Extension with ID $extensionId added to the profile."
