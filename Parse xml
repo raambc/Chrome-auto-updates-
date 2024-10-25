@@ -1,0 +1,44 @@
+import xml.etree.ElementTree as ET
+
+# Function to read domain names from the first file
+def read_domain_names(domain_file):
+    with open(domain_file, 'r') as f:
+        domains = [line.strip() for line in f.readlines()]
+    return domains
+
+# Function to parse XML and search for domain names in the 'url' attribute
+def parse_xml_and_find_domains(xml_file, domains):
+    tree = ET.parse(xml_file)
+    root = tree.getroot()
+
+    matching_sites = {}
+
+    # Loop through all <site> elements
+    for site in root.findall('.//site'):
+        url = site.get('url')  # Get the 'url' attribute from the <site> tag
+
+        # Check if the domain name in the 'url' attribute matches any domain in the list
+        if any(domain in url for domain in domains):
+            # Add the site contents to the matching_sites dictionary
+            matching_sites[url] = ET.tostring(site, encoding='unicode')
+
+    return matching_sites
+
+# Save the results to a file
+def save_results(output_file, matching_sites):
+    with open(output_file, 'w') as f:
+        for url, content in matching_sites.items():
+            f.write(f"URL: {url}\n")
+            f.write(f"Content:\n{content}\n\n")
+
+# Main function
+def main(domain_file, xml_file, output_file):
+    domains = read_domain_names(domain_file)
+    matching_sites = parse_xml_and_find_domains(xml_file, domains)
+    save_results(output_file, matching_sites)
+
+if __name__ == "__main__":
+    domain_file = 'domain_list.txt'  # Replace with your domain file
+    xml_file = 'data.xml'  # Replace with your XML file
+    output_file = 'matching_sites.txt'  # Output file to save the results
+    main(domain_file, xml_file, output_file)
