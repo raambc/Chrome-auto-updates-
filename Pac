@@ -1,0 +1,9 @@
+function FindProxyForURL(url, host) {
+    var deadend_hosts = ['*.thelayoff.com', '*.youtube.com', '*.vimeo.com'];
+    for (var i = 0; i < deadend_hosts.length; i++) {
+        if (shExpMatch(host, deadend_hosts[i])) {
+            return "PROXY 127.0.0.1:8080"; // Redirect to a non-functional proxy
+        }
+    }
+    return "DIRECT"; // Allow other traffic
+}
