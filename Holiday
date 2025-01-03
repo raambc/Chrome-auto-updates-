@@ -1,0 +1,58 @@
+To add a holiday from a .hol file to your Outlook calendar using PowerShell, you can use the following script. This assumes you have the .hol file ready and want to import it.
+
+Script to Add Holidays from .hol File
+
+# Define the path to the .hol file
+$holFilePath = "C:\Path\To\Your\File.hol"
+
+# Check if the file exists
+if (Test-Path -Path $holFilePath) {
+    Write-Output "Importing holidays from $holFilePath..."
+
+    # Launch Outlook COM object
+    $outlook = New-Object -ComObject Outlook.Application
+    $namespace = $outlook.GetNamespace("MAPI")
+
+    # Import holidays
+    try {
+        $namespace.ImportHolidayFile($holFilePath)
+        Write-Output "Holidays successfully imported!"
+    } catch {
+        Write-Output "An error occurred: $_"
+    }
+} else {
+    Write-Output "The .hol file does not exist at the specified path."
+}
+
+Steps:
+
+1. Prepare the .hol file:
+
+A .hol file contains holiday data in a structured format (e.g., [Country/Region] followed by holiday dates).
+
+
+
+2. Update the File Path:
+
+Replace "C:\Path\To\Your\File.hol" with the actual path to your .hol file.
+
+
+
+3. Run the Script:
+
+Save the script in a .ps1 file and execute it in PowerShell.
+
+
+
+
+Notes:
+
+Ensure Outlook is installed and properly configured on the system where you are running the script.
+
+The .hol file format should comply with Outlook's expected structure.
+
+Run PowerShell as an administrator if necessary.
+
+
+Would you like detailed guidance on creating a .hol file?
+
