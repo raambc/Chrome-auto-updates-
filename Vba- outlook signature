@@ -1,0 +1,47 @@
+Private Sub Application_ItemSend(ByVal Item As Object, Cancel As Boolean)
+    Dim objMail As Outlook.MailItem
+    Dim objWord As Object
+    Dim objDoc As Object
+    Dim objSel As Object
+    Dim objSignature As String
+
+    ' Ensure the item is a MailItem
+    If TypeOf Item Is Outlook.MailItem Then
+        Set objMail = Item
+        Set objWord = objMail.GetInspector.WordEditor
+        Set objDoc = objWord
+        Set objSel = objWord.Application.Selection
+
+        ' Retrieve the default signature
+        objSignature = GetOutlookSignature()
+
+        ' Append the signature if missing
+        If InStr(objDoc.Range.Text, objSignature) = 0 Then
+            objSel.EndKey Unit:=6 ' Move cursor to end
+            objSel.TypeParagraph ' New line
+            objSel.InsertAfter objSignature
+        End If
+    End If
+End Sub
+
+Function GetOutlookSignature() As String
+    Dim objFSO As Object
+    Dim objFile As Object
+    Dim strPath As String
+    Dim strSig As String
+    
+    ' Get the user's default signature path
+    strPath = Environ("APPDATA") & "\Microsoft\Signatures\"
+    
+    ' Use the default signature (HTML version)
+    On Error Resume Next
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    Set objFile = objFSO.OpenTextFile(strPath & "YourSignatureName.htm", 1)
+    
+    If Not objFile Is Nothing Then
+        strSig = objFile.ReadAll
+        objFile.Close
+    End If
+    
+    GetOutlookSignature = strSig
+End Function
