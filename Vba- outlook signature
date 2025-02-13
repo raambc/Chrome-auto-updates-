@@ -45,3 +45,138 @@ Function GetOutlookSignature() As String
     
     GetOutlookSignature = strSig
 End Function
+-----
+
+Since the signature is present in the Outlook desktop client but missing when Outlook is opened via Adobe Reader (Simple MAPI), the issue is that Simple MAPI does not trigger Outlook’s normal email composition process, bypassing the default signature settings.
+
+Possible Fixes for Enforcing Outlook Signatures When Invoked from Adobe Reader
+
+✅ Solution 1: Manually Insert Signature Using Quick Steps (Best Workaround)
+
+Since VBA and registry settings don’t apply to Simple MAPI, you can use a Quick Step to insert the signature manually with one click.
+
+Steps:
+
+1. Open Outlook → Click on the Home tab.
+
+
+2. Click Quick Steps → New Quick Step → Custom.
+
+
+3. Name it "Insert Signature".
+
+
+4. Click Choose an Action → Select New Message.
+
+
+5. In the text body, enter your signature manually or use Quick Parts.
+
+
+6. Click Finish.
+
+
+7. Now, whenever Adobe Reader opens an email, click the Quick Step to insert the signature.
+
+
+
+
+---
+
+✅ Solution 2: Modify Adobe Reader's Email Handling
+
+Adobe Reader may not be correctly handling Outlook’s default settings.
+
+Steps:
+
+1. Open Adobe Reader → Click Edit → Preferences → Email Accounts.
+
+
+2. Remove any existing email configurations.
+
+
+3. Click Add Account → Choose Microsoft Outlook and set it as default.
+
+
+4. Restart Adobe Reader and Outlook.
+
+
+5. Try sending an attachment via Adobe Reader again.
+
+
+
+
+---
+
+✅ Solution 3: Create an Outlook Macro to Insert Signature Automatically
+
+Since Simple MAPI does not trigger the Application_ItemSend event in VBA, use this macro to manually insert the signature when the email is open.
+
+Steps to Add VBA Macro:
+
+1. Open Outlook and press ALT + F11 to open the VBA Editor.
+
+
+2. Go to Insert → Module and paste the following code:
+
+
+
+Sub InsertSignature()
+    Dim objMail As Outlook.MailItem
+    Dim objInspector As Outlook.Inspector
+    Dim objDoc As Object
+    Dim objSelection As Object
+    Dim strSig As String
+    
+    ' Get active email
+    On Error Resume Next
+    Set objInspector = Application.ActiveInspector
+    If Not objInspector Is Nothing Then
+        Set objMail = objInspector.CurrentItem
+        Set objDoc = objMail.GetInspector.WordEditor
+        Set objSelection = objDoc.Application.Selection
+        
+        ' Insert signature manually
+        strSig = "Your Signature Here"  ' Replace with your actual signature text
+        objSelection.TypeText strSig
+    End If
+End Sub
+
+How to Use It:
+
+1. Assign the macro to a Quick Access Toolbar button (File → Options → Quick Access Toolbar → Macros).
+
+
+2. When an email opens from Adobe Reader, click the Insert Signature button.
+
+
+
+
+---
+
+✅ Solution 4: Force Signature via Outlook Settings
+
+1. Go to Outlook → File → Options → Mail.
+
+
+2. Under Signatures, ensure the default signature is applied for New messages and Replies/Forwards.
+
+
+3. Restart Outlook and test again.
+
+
+
+
+---
+
+✅ Solution 5: Use CodeTwo or Exclaimer for Auto Signatures
+
+If this issue affects multiple users in an organization, use a server-side signature management tool (e.g., CodeTwo, Exclaimer). These tools apply signatures automatically on outgoing emails, ensuring they are included even when sent via Adobe Reader.
+
+
+---
+
+Final Recommendation
+
+Since Simple MAPI bypasses Outlook’s default email composition, the best quick fix is to use Solution 1 (Quick Steps) or Solution 3 (VBA Macro). If this affects multiple users, a server-side solution like CodeTwo is the best option.
+
+Would you like help setting up a server-side signature enforcement policy for M365?
