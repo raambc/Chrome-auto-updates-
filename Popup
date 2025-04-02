@@ -1,0 +1,80 @@
+how to create a Intune policy that create an URL ( https://localhost/path) to add in allow popup list. please note localhost should be computer name of each computer
+
+To create an Intune policy that adds a URL (e.g., `https://localhost/path`) to the allow pop-up list in Microsoft Edge, where `localhost` dynamically resolves to the computer name of each device, follow these steps:
+
+---
+
+### **Steps to Configure Intune Policy for Pop-Up Allow List**
+
+1. **Sign in to Microsoft Intune Admin Portal**:
+   - Navigate to [Microsoft Endpoint Manager](https://endpoint.microsoft.com).
+
+2. **Create a New Configuration Profile**:
+   - Go to **Devices** > **Windows** > **Configuration Profiles** > **Create Profile**.
+   - Select **Platform**: Windows 10 and later.
+   - Choose **Profile Type**: Settings Catalog.
+
+3. **Add Settings for Pop-Up Allow List**:
+   - In the **Settings Catalog**, search for `Allow Popups`.
+   - Select the relevant setting under Microsoft Edge policies.
+
+4. **Specify the URL with Dynamic Computer Name**:
+   - Use a dynamic variable for the computer name in the URL format. For example:
+     ```
+     https://%COMPUTERNAME%/path
+     ```
+   - `%COMPUTERNAME%` is a placeholder that resolves to the actual computer name of each device.
+
+5. **Save and Assign the Policy**:
+   - Configure scope tags if necessary.
+   - Assign the policy to a device group or user group.
+   - Click **Create** to deploy the policy.
+
+---
+
+### **Using OMA-URI for Advanced Configuration**
+If you need more granular control, you can use an OMA-URI setting:
+
+1. Add a custom configuration profile in Intune.
+2. Use the following OMA-URI path:
+   ```
+   ./Device/Vendor/MSFT/Policy/Config/Edge/PopupsAllowedForUrls
+   ```
+3. Set the value as:
+   ```json
+   ["https://%COMPUTERNAME%/path"]
+   ```
+
+---
+
+### **Notes:**
+- Ensure that `localhost` dynamically resolves to the computer name by using `%COMPUTERNAME%`.
+- Test this configuration in a lab environment before deploying it organization-wide.
+- Restart Microsoft Edge on devices after applying the policy for changes to take effect[6].
+
+This approach ensures that every device dynamically uses its own hostname in the allowed pop-up list.
+
+Citations:
+[1] 1001402783.jpg https://pplx-res.cloudinary.com/image/upload/v1743568798/user_uploads/KvwyJbFceklNbss/1001402783.jpg
+[2] Block and whitelist specific URL in Microsoft Edge or Google Chrome https://www.joeyverlinden.com/block-and-whitelist-url/
+[3] Manage Pop-up Blocker with Intune Configuration Profile - Anoop Nair https://www.anoopcnair.com/manage-pop-up-blocker-with-intune/
+[4] Set Computer Name During Windows Autopilot Hybrid Azure AD Join Using Intune HTMD Blog https://www.anoopcnair.com/computer-name-during-windows-autopilot-intune/
+[5] I'm trying to set up an allow list in intune for URLAllowList with multiple URL's and some with wild cards https://stackoverflow.com/questions/79023389/im-trying-to-set-up-an-allow-list-in-intune-for-urlallowlist-with-multiple-url
+[6] Configure Microsoft Edge policy settings with Microsoft Intune https://learn.microsoft.com/en-us/deployedge/configure-edge-with-intune
+[7] Is there an endpoint policy to enable pop-up blocker on one ... https://learn.microsoft.com/en-us/answers/questions/1123335/is-there-an-endpoint-policy-to-enable-pop-up-block
+[8] Windows Device Configuration - Browser Pop-ups<!-- --> | Tenable® https://www.tenable.com/audits/items/Tenable_Best_Practice_Microsoft_Intune_Windows_v1.0.audit:371eb4b93e427304d0bfad70fef7b60c
+[9] Configuring Microsoft Edge and 'Always allow to open links of this ... https://www.imab.dk/configuring-microsoft-edge-and-always-allow-to-open-links-of-this-type-in-the-associated-app-using-microsoft-endpoint-manager/
+[10] Intune Edge policy to allow website authentication popup - Reddit https://www.reddit.com/r/Intune/comments/10h1q7k/intune_edge_policy_to_allow_website/
+[11] Endpoint Manager Admin center - Allow pop-up windows on specific ... https://answers.microsoft.com/en-us/microsoftedge/forum/all/endpoint-manager-admin-center-allow-pop-up-windows/8712839a-c861-441b-8398-732e6c217891
+[12] Allow Pop-up for specific sites in Edge Chromium - Learn Microsoft https://learn.microsoft.com/en-us/answers/questions/258285/allow-pop-up-for-specific-sites-in-edge-chromium
+[13] Microsoft Edge Browser Policy Documentation https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies
+[14] What edge policies do you have configured? https://www.reddit.com/r/Intune/comments/1aipgfr/what_edge_policies_do_you_have_configured/
+[15] Block pop-ups in Microsoft Edge https://support.microsoft.com/en-us/microsoft-edge/block-pop-ups-in-microsoft-edge-1d8ba4f8-f385-9a0b-e944-aa47339b6bb5
+[16] Enabling, Disabling and adding exceptions to the Pop-up Blocker in ... https://supportcenter.lexisnexis.com/app/answers/answer_view/a_id/1083751/~/enabling,-disabling-and-adding-exceptions-to-the-pop-up-blocker-in-microsoft
+[17] Allow pop-up windows on specific sites - ADMX.help. https://admx.help/?Category=EdgeChromium&Policy=Microsoft.Policies.Edge%3A%3APopupsAllowedForUrls
+[18] r/Intune on Reddit: Edge - Configuration profile both allows popups ... https://www.reddit.com/r/Intune/comments/1196upf/edge_configuration_profile_both_allows_popups_and/
+[19] Allowing pop-ups from specific URLs in Edge, using Intune https://stackoverflow.com/questions/55471720/allowing-pop-ups-from-specific-urls-in-edge-using-intune
+[20] View Blog https://www.mdmandgpanswers.com/blogs/view-blog/lock-down-the-windows-settings-app-with-intune
+[21] Use Intune to Configure Sites to Open when the Edge Browser Starts https://www.prajwaldesai.com/use-intune-to-configure-sites-to-open-when-the-edge-browser-starts/
+[22] Allow access to a list of URLs on edge https://www.reddit.com/r/Intune/comments/xcpxmp/allow_access_to_a_list_of_urls_on_edge/
+[23] Configure Edge Chromium Favorites Using Intune | Endpoint Manager https://support.bemopro.com/hc/en-us/articles/24348449861523-Configure-Edge-Chromium-Favorites-Using-Intune-Endpoint-Manager
