@@ -1,0 +1,18 @@
+Kavach means "protection."
+
+Did you know that 80-90% of our bank’s applications are web-based, relying on browsers to function? This makes browsers a critical component of our ecosystem.
+
+As the Product Owner for Google Chrome and Edge (both based on the Chromium engine), my team and I constantly deal with browser-related challenges after every major release, collaborating with developers and vendors to mitigate issues caused after the upgrade.
+
+By now, you might have a clue about what we're aiming for with Chromium Kavach—a solution designed to protect our bank by minimizing downtime for mission-critical applications.
+
+Frequent Chromium updates introduce new features, modify functionalities, and deprecate outdated ones—often disrupting web applications. Unfortunately, these issues are usually discovered only after deployment, leading to downtime, performance issues, and security risks.
+
+In the past 3 year alone, we encountered 52 exceptions due to these updates, forcing Lines of Business (LOBs) to remain on older, less secure versions—exposing the bank to security vulnerabilities.
+
+Kavach addresses this challenge by automating the identification, analysis, and communication of relevant changes, enabling developers to proactively mitigate risks before they impact production.
+
+Now, let’s jump into the demo!
+
+
+---
