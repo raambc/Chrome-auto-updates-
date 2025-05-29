@@ -1,0 +1,18 @@
+
+Yes, browser "out of memory" errors are expected when using 32-bit versions of Chrome (or other browsers) with Atlassian Cloud products like Jira and Confluence, especially as memory usage approaches or exceeds 300 MB.
+
+- 32-bit browsers have significant memory limitations; they cannot allocate more than about 2–4 GB of RAM per process, and in practice, fragmentation and browser overhead often cause "out of memory" errors at much lower levels—commonly around the 300–500 MB mark[1].
+- Atlassian documentation specifically notes that features like Whiteboards may fail to load or throw "out of memory" errors in 32-bit browsers due to these constraints[1].
+- Multiple reports confirm that memory usage can rise quickly during editing sessions, and 32-bit browsers are much more likely to hit these limits and crash, while 64-bit browsers handle much higher memory loads without errors[1][3].
+
+To avoid these errors, it is strongly recommended to use the 64-bit version of Chrome or other modern 64-bit browsers for Atlassian Cloud products[1].
+
+Citations:
+[1] Update Documentation to Include 32-bit Browser Limitations and 64 ... https://jira.atlassian.com/browse/CONFCLOUD-81761
+[2] Significant Memory Consumption in Chrome while Editing - Jira https://jira.atlassian.com/browse/CONF-25659
+[3] Local browser sees heavy memory increase after edi... https://community.atlassian.com/forums/Confluence-questions/Local-browser-sees-heavy-memory-increase-after-editing-pages/qaq-p/1544280
+[4] Atlassian: How to fix out of memory errors by increasing available ... https://easycloudsupport.zendesk.com/hc/en-us/articles/360002177592-Atlassian-How-to-fix-out-of-memory-errors-by-increasing-available-memory
+[5] OutOfMemoryError due to too Much Memory for Lucene in 32-bit ... https://support.atlassian.com/jira/kb/outofmemoryerror-due-to-too-much-memory-for-lucene-in-32-bit-sun-jvms/
+[6] ME/2 - Bar Ilan NLP Lab https://nlp.biu.ac.il/~ravfogs/resources/embeddings-alignment/glove_vocab.250k.txt
+[7] Solved: JIRA/Confluence ran out of the Memory, how can I r... https://community.atlassian.com/t5/Jira-questions/JIRA-Confluence-ran-out-of-the-Memory-how-can-I-release-memory/qaq-p/2208087
+[8] Job - Linktopus | PDF - Scribd https://www.scribd.com/document/680658720/Job-Linktopus-2-4
