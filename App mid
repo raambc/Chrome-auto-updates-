@@ -16,3 +16,20 @@ Throughout the reporting period, four zero-day vulnerabilities affecting Chrome 
 Under the ongoing n-2 release optimization program, a strategy was proposed to enable monthly releases for key products. While Chrome and Firefox are already aligned to this cadence, Adobe Reader presented challenges due to packaging delays in Windows 11 environments. A new security baseline was created and is now undergoing UAT testing to enable consistent monthly releases of both Adobe Reader and Acrobat.
 
 
+
+
+Product Ownership and Team Leadership
+
+As part of product ownership, coordinated efforts across teams, tools, and processes have ensured consistent and timely product delivery. Stewards were mentored through regular knowledge-sharing and review sessions, enabling them to manage the lifecycle independently and effectively.
+
+With increasing risk and compliance requirements, automation has been a key focus. An internal release tracking system was developed to streamline version management and reduce manual effort, with plans to expand automation further.
+
+Efficient time management and strong collaboration with stewards have been instrumental. Support was also extended to initiatives like the EMIE Site List cloud migration, reinforcing a leadership approach centered on enabling, guiding, and empowering others rather than directing tasks hands-on.
+
+
+Security Baseline and Documentation Updates
+------
+The Mozilla Firefox baseline documentation was thoroughly revamped, with minimal dependency on security teams. The team handled multiple revisions to align with compliance standards, successfully completing the effort with internal collaboration. Security reviews for Chrome and Adobe Reader are ongoing, with implementation expected to begin in the upcoming months, marking a more execution-driven second half of the year.
+
+
+
