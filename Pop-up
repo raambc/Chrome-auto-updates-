@@ -1,0 +1,32 @@
+# Requires running as Administrator
+$computerName = $env:COMPUTERNAME
+$customURL = "https://$computerName.example.com"  # Modify URL pattern as needed
+$registryPath = "HKLM:\Software\Policies\Microsoft\Edge\URLAllowlist"
+
+# Create registry key if missing
+if (-not (Test-Path $registryPath)) {
+    New-Item -Path $registryPath -Force | Out-Null
+}
+
+# Get existing entries
+$currentEntries = Get-ItemProperty -Path $registryPath | 
+    Get-Member -MemberType NoteProperty |
+    Where-Object {$_.Name -match '^\d+$'} |
+    Select-Object -ExpandProperty Name
+
+# Find next available index
+$nextIndex = if ($currentEntries) { 
+    [int]($currentEntries | Measure-Object -Maximum).Maximum + 1 
+} else { 
+    1 
+}
+
+# Add new entry
+try {
+    Set-ItemProperty -Path $registryPath -Name $nextIndex -Value $customURL -ErrorAction Stop
+    Write-Output "Successfully added $customURL as entry $nextIndex"
+    Write-Output "Restart Microsoft Edge for changes to take effect"
+}
+catch {
+    Write-Error "Failed to update registry: $_"
+}
