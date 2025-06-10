@@ -1,0 +1,15 @@
+
+Subject: Request for Approval – Standard Change Template Submission
+
+Dear [Management Team],
+
+I hope you're well.
+
+We are currently facing an issue with submitting a standard change template in ServiceNow, as it was rejected due to the sample changes being categorized as "medium risk." The classification was influenced by timeline conflicts and the CI impact assessment, not by the complexity of the work itself.
+
+The change in question involves the enablement of an extension with no impact on active production environments. It is technically low-risk, but due to timing, it was rated as moderate. As per guidelines, sample changes must be low-risk, but the timing conflict is causing this discrepancy. If we submit the same change in a month, it will be classified as low risk without any changes to the work involved.
+
+We kindly request your reconsideration and approval to submit this change template as low risk, given its nature, and to avoid unnecessary delays.
+
+Thank you for your understanding and support.
+
