@@ -1,0 +1,25 @@
+Chrome web socket extension for DPA is not working in Chrome version 136
+
+The Chrome WebSocket extension for DPA not working in Chrome version 136 is likely related to changes in Chrome's extension platform, specifically the transition from Manifest V2 to Manifest V3. Chrome 136 has started disabling Manifest V2 extensions by default, which breaks many existing extensions that rely on it. A temporary workaround reported is:
+
+- Go to `chrome://flags/`
+- Search for "manifest v2" and set it to "Disabled"
+- Restart Chrome
+- Re-enable the extension on the extensions page (`chrome://extensions/`)
+- Restart Chrome again
+
+This can temporarily restore functionality, but support for Manifest V2 extensions will be fully removed by Chrome version 139 (expected around July), so a long-term fix requires updating the extension to Manifest V3 or switching to a browser like Firefox that still supports Manifest V2[6].
+
+Additionally, Chrome 116 and later improved WebSocket support in extension service workers, requiring keepalive messages to maintain connections. If your extension uses WebSockets in a service worker, ensure it implements a keepalive mechanism to prevent the service worker from being terminated and the WebSocket connection from closing[4].
+
+In summary, the main issue is the Manifest V2 deprecation in Chrome 136 affecting extension compatibility, and WebSocket connection management changes in newer Chrome versions. Updating the extension to Manifest V3 and implementing WebSocket keepalive are recommended steps.
+
+Citations:
+[1] Is anyone experiencing WebSocket Realtime Error on Chrome ... https://community.openai.com/t/is-anyone-experiencing-websocket-realtime-error-on-chrome-browser/1091793?page=2
+[2] Cannot get websocket connection to work in Chrome 19 https://stackoverflow.com/questions/10456706/cannot-get-websocket-connection-to-work-in-chrome-19
+[3] Chrome not connecting to websocket server · Issue #144 - GitHub https://github.com/beyondcode/laravel-websockets/issues/144
+[4] Use WebSockets in service workers | Chrome Extensions https://developer.chrome.com/docs/extensions/how-to/web-platform/websockets
+[5] Chrome 59+ websocket frames no longer visible in DevTools https://stackoverflow.com/questions/44533111/chrome-59-websocket-frames-no-longer-visible-in-devtools/72905810
+[6] Any changelog for Chrome 136? - Reddit https://www.reddit.com/r/chrome/comments/1jmr7dg/any_changelog_for_chrome_136/
+[7] Chrome extension - WebSocket No Connection Made https://groups.google.com/a/chromium.org/g/chromium-extensions/c/9FgD9EGYjps
+[8] Chrome Web Inspector Web Socket Debugging - Stack Overflow https://stackoverflow.com/questions/8952773/chrome-web-inspector-web-socket-debugging
